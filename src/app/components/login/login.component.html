@@ -1,0 +1,73 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo-circle">
+        <span class="logo-text">GGUH</span>
+      </div>
+    </div>
+
+    <div *ngIf="error" class="error-alert">
+      <span class="error-icon">⚠</span>
+      {{ error }}
+    </div>
+
+    <div *ngIf="successMessage" class="success-alert" style="word-break: break-all; user-select: text;">
+      <span class="success-icon">✓</span>
+      {{ successMessage }}
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="!isForgotPasswordMode" (ngSubmit)="login()" class="login-form">
+      <div class="form-group">
+        <label for="username">User ID / College PIN</label>
+        <div class="input-container">
+          <input type="text" id="username" [(ngModel)]="credentials.username" name="username"
+            placeholder="Enter your ID" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-container">
+          <input type="password" id="password" [(ngModel)]="credentials.password" name="password"
+            placeholder="Enter your password" required>
+        </div>
+      </div>
+
+      <button type="submit" class="login-btn">
+        <span>Sign In</span>
+      </button>
+
+      <div class="footer-links">
+        <a href="javascript:void(0)" (click)="toggleForgotPasswordMode()">Forgot Password?</a>
+        <span class="divider">•</span>
+        <a href="#">Help</a>
+      </div>
+    </form>
+
+    <!-- Forgot Password Form -->
+    <form *ngIf="isForgotPasswordMode" (ngSubmit)="requestPasswordReset()" class="login-form">
+      <h3>Reset Password</h3>
+      <p style="text-align: center; color: #666; font-size: 0.9em; margin-bottom: 20px;">
+        Enter your email address and we'll send you a link to reset your password.
+      </p>
+
+      <div class="form-group">
+        <label for="resetEmail">Email Address</label>
+        <div class="input-container">
+          <input type="email" id="resetEmail" [(ngModel)]="resetEmail" name="resetEmail" placeholder="Enter your email"
+            required email>
+        </div>
+      </div>
+
+      <button type="submit" class="login-btn">
+        <span>Send Reset Link</span>
+      </button>
+
+      <div class="footer-links">
+        <a href="javascript:void(0)" (click)="toggleForgotPasswordMode()">Back to Login</a>
+      </div>
+    </form>
+
+  </div>
+</div>
